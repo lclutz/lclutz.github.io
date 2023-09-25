@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Startseite</title>
+    <style type="text/css">
+        body {
+            font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
+            background: green;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        article {
+            padding: 20px;
+            max-width: 900px;
+            margin: 100px auto 0 auto;
+            border: 1px solid;
+            border-radius: 10px;
+        }
+
+        .searchbar {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .searchbar input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid;
+        }
+
+        .favorites {
+            display: flex;
+            flex-flow: row wrap;
+            gap: 30px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0e0e0e;
+            }
+
+            article {
+                background: #0e0e0e;
+                color: #f1f1f1;
+                border-color: lightgreen;
+            }
+
+            a {
+                color: #f1f1f1;
+            }
+
+            a:hover {
+                color: #fff;
+            }
+
+            h3 {
+                color: lightgreen;
+            }
+
+            .searchbar input {
+                background: #0e0e0e;
+                color: #f1f1f1;
+                border-color: lightgreen;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #f1f1f1;
+            }
+
+            article {
+                background: #f1f1f1;
+                color: #0e0e0e;
+                border-color: darkgreen;
+            }
+
+            a {
+                color: #0e0e0e;
+            }
+
+            a:hover {
+                color: #000;
+            }
+
+            h3 {
+                color: darkgreen;
+            }
+
+            .searchbar input {
+                background: #f1f1f1;
+                color: #0e0e0e;
+                border-color: darkgreen;
+            }
+        }
+    </style>
+</head>
+<body>
+<article>
+    <div class="searchbar">
+        <input type="text" onkeydown="search(this)" autofocus />
+    </div>
+    <div class="favorites">
+    <section>
+        <h3>Docs</h3>
+        <ul>
+            <li><a href="https://en.cppreference.com/">C++ reference</a></li>
+            <li><a href="https://docs.microsoft.com/en-us/windows/win32/api/">Win32</a></li>
+            <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-alphabetically?view=msvc-170">MSVC Compiler Options</a></li>
+            <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-170">MSVC Linker Options</a></li>
+            <li><a href="https://docs.oracle.com/en/java/javase/18/docs/api/index.html">Java SE 18</a></li>
+            <li><a href="https://docs.python.org/3/">Python</a></li>
+            <li><a href="https://pkg.go.dev/std">Go Standard Library</a></li>
+            <li><a href="https://docs.gl/">OpenGL</a></li>
+            <li><a href="https://docs.opencv.org/4.6.0/">OpenCV Modules</a></li>
+            <li><a href="https://wiki.libsdl.org/APIByCategory">SDL2 API By Category</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Spiele</h3>
+        <ul>
+            <li><a href="https://lichess.org/">Schach</a></li>
+            <li><a href="https://dan-ball.jp/en/javagame/dust/">Powder Game</a></li>
+            <li><a href="https://jacklance.github.io/PuzzleScript/play.html?p=cfdcc6e23f1fb3e9de2fd42fafaf4d4c">ENIGMASH</a></li>
+            <li><a href="https://de.crazygames.com/spiele/age-of-war?theatreMode=true">Age Of War</a></li>
+            <li><a href="https://neal.fun/perfect-circle/">Draw a Perfect Circle</a></li>
+            <li><a href="https://www.concerthotels.com/got-rhythm">Got Rhythm?</a></li>
+            <li><a href="https://humanbenchmark.com/">Human Benchmark</a></li>
+            <li><a href="https://monkeytype.com/">monkeytype</a></li>
+            <li><a href="https://tetr.io/">tetr.io</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Useful Links</h3>
+        <ul>
+            <li><a href="https://godbolt.org/">Compiler Explorer</a></li>
+            <li><a href="https://cdecl.org/">cdecl</a></li>
+            <li><a href="https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#">Intel Intrinsics Guide</a></li>
+            <li><a href="https://vcpkg.io/en/packages.html">vcpkg Package Search</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Lokal</h3>
+        <ul>
+            <li><a href="http://127.0.0.1:8384/">Syncthing</a></li>
+            <li><a href="http://mcp.fritz.box:8096/web/index.html">Jellyfin</a></li>
+            <li><a href="http://localhost:9091/transmission/web/">Transmission</a></li>
+            <li><a href="http://127.0.0.1:2342/library/browse">PhotoPrism</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Intern</h3>
+        <ul>
+            <li><a href="http://stachelbeere.fritz.box/Temperatur.html">Temperaturkurve</a></li>
+
+            <li>
+                Arbeitszimmer
+                <ul>
+                    <li><a href="http://shelly1-58bf25d83111.fritz.box/relay/0?turn=on" target="_blank">Licht an</a></li>
+                    <li><a href="http://shelly1-58bf25d83111.fritz.box/relay/0?turn=off" target="_blank">Licht aus</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Banking</h3>
+        <ul>
+            <li><a href="https://www.vvrbank-krp.de/services_cloud/portal">Volksbank</a></li>
+            <li><a href="https://www.paypal.com/myaccount/summary">PayPal</a></li>
+            <li><a href="https://www.ffb.de/login/login.jsp">FFB</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Self hosted</h3>
+        <ul>
+            <li><a href="https://drive.lclutz.de/">Nextcloud</a></li>
+            <li><a href="https://vault.lclutz.de/">Vaultwarden</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Ausbildung</h3>
+        <ul>
+            <li><a href="https://pao-ihk-karlsruhe.de/tibrosBB/BB_auszubildende.jsp?allowCookies=OK">IHK Karlsruhe</a></li>
+            <li><a href="https://pao-ihk-karlsruhe.de/azubiapp/azubi/login">AzubiApp</a></li>
+        </ul>
+    </section>
+    </div>
+</article>
+</body>
+<script type="text/javascript">
+    function setBackgroundPicture() {
+        fetch("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1", {
+            mode: "no-cors",
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.url) {
+                document.body.style.backgroundImage = "url('https://www.bing.com" + data.url + "')";
+            }
+        });
+    }
+
+    DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
+    SEARCH_MAP = {
+        'amazon': 'https://www.amazon.de/s?k=%s',
+        'ebay'  : 'https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xtest.TRS0&_nkw=%s&_sacat=0',
+        'img'   : 'https://www.google.com/search?biw=2560&bih=1336&tbm=isch&sa=1&ei=WdWnXNfIH-6Hk74Pj8Gy6AM&q=%s',
+        'man'   : 'https://man.cx/?page=%s&do%5Bgo%5D=go',
+        'map'   : 'https://www.google.de/maps/@49.0054018,8.3775153,15z?q=%s',
+        'sp'    : 'https://www.startpage.com/sp/search?query=%s&prfe=5e393999691de043c681bec7c63dcaa9b72b2170d3b94ff62fab182e5556a312dc85d3a6e9ad93df6eb8d2866147ffd9eabe15b478e367b2ffe12ecdecddfec7901c6e53e0fe1e1c934041bdf9',
+        'tr'    : 'https://translate.google.de/?sl=auto&tl=de&text=%s&op=translate',
+        'tre'   : 'https://translate.google.de/?sl=de&tl=en&text=%s&op=translate',
+        'w'     : 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&language=de&go=Go&search=%s',
+        'we'    : 'https://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=%s',
+        'yt'    : 'https://www.youtube.com/results?search_query=%s',
+    }
+
+    function search(element) {
+        if (event.key == 'Enter') {
+            url = DEFAULT_SEARCH.replace("%s", element.value);
+            words = element.value.split(" ");
+            if (words.length > 1)
+            {
+                search_engine = words[0];
+                if (search_engine in SEARCH_MAP) {
+                    url = SEARCH_MAP[search_engine].replace("%s", words.slice(1).join(" "));
+                }
+            }
+            window.location.href = url;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("TODO: set focus on search input");
+    });
+</script>
+</html>
