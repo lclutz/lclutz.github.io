@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Startseite</title>
     <style type="text/css">
+        :root {
+            --base-font-size: 18px;
+            --font-weight-normal: 500;
+            --font-weight-bold: 900;
+        }
+
+        @font-face {
+            font-family: 'Metropolis';
+            src: local('Metropolis-Medium'), url('./Metropolis-Medium.woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Metropolis';
+            src: local('Metropolis-Medium'), url('./Metropolis-Medium.woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
         body {
             font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
             background: green;
@@ -111,7 +131,7 @@
 <body>
 <article>
     <div class="searchbar">
-        <input type="text" onkeydown="search(this)" autofocus />
+        <input type="text" id="searchbox" onkeydown="searchBoxKeyDownHandler(this)" autofocus />
     </div>
     <div class="favorites">
     <section>
@@ -217,8 +237,14 @@
         });
     }
 
-    DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
-    SEARCH_MAP = {
+    function searchBoxKeyDownHandler(element) {
+        if (event.key == 'Enter') {
+            search(element.value);
+        }
+    }
+
+    const DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
+    const SEARCH_MAP = {
         'amazon': 'https://www.amazon.de/s?k=%s',
         'ebay'  : 'https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xtest.TRS0&_nkw=%s&_sacat=0',
         'img'   : 'https://www.google.com/search?biw=2560&bih=1336&tbm=isch&sa=1&ei=WdWnXNfIH-6Hk74Pj8Gy6AM&q=%s',
@@ -232,23 +258,29 @@
         'yt'    : 'https://www.youtube.com/results?search_query=%s',
     }
 
-    function search(element) {
-        if (event.key == 'Enter') {
-            url = DEFAULT_SEARCH.replace("%s", element.value);
-            words = element.value.split(" ");
-            if (words.length > 1)
-            {
-                search_engine = words[0];
-                if (search_engine in SEARCH_MAP) {
-                    url = SEARCH_MAP[search_engine].replace("%s", words.slice(1).join(" "));
-                }
+    function search(searchQuery) {
+        let url = DEFAULT_SEARCH.replace("%s", searchQuery);
+        const words = searchQuery.split(" ");
+        if (words.length > 1)
+        {
+            search_engine = words[0];
+            if (search_engine in SEARCH_MAP) {
+                url = SEARCH_MAP[search_engine].replace("%s", words.slice(1).join(" "));
             }
-            window.location.href = url;
+        }
+        window.location.href = url;
+    }
+
+
+    function main() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('s');
+        if (searchQuery)
+        {
+            search(searchQuery);
         }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        console.log("TODO: set focus on search input");
-    });
+    (() => { main(); })();
 </script>
 </html>
