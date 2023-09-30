@@ -4,11 +4,91 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Startseite</title>
+    <script type="text/javascript">
+        const DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
+        const SEARCH_MAP = {
+            'amazon': 'https://www.amazon.de/s?k=%s',
+            'ebay'  : 'https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xtest.TRS0&_nkw=%s&_sacat=0',
+            'img'   : 'https://www.google.com/search?biw=2560&bih=1336&tbm=isch&sa=1&ei=WdWnXNfIH-6Hk74Pj8Gy6AM&q=%s',
+            'man'   : 'https://man.cx/?page=%s&do%5Bgo%5D=go',
+            'map'   : 'https://www.google.de/maps/@49.0054018,8.3775153,15z?q=%s',
+            'sp'    : 'https://www.startpage.com/sp/search?query=%s&prfe=5e393999691de043c681bec7c63dcaa9b72b2170d3b94ff62fab182e5556a312dc85d3a6e9ad93df6eb8d2866147ffd9eabe15b478e367b2ffe12ecdecddfec7901c6e53e0fe1e1c934041bdf9',
+            'tr'    : 'https://translate.google.de/?sl=auto&tl=de&text=%s&op=translate',
+            'tre'   : 'https://translate.google.de/?sl=de&tl=en&text=%s&op=translate',
+            'w'     : 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&language=de&go=Go&search=%s',
+            'we'    : 'https://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=%s',
+            'yt'    : 'https://www.youtube.com/results?search_query=%s',
+        }
+
+        function search(searchQuery) {
+            let url = DEFAULT_SEARCH.replace("%s", searchQuery);
+            const words = searchQuery.split(" ");
+            if (words.length > 1)
+            {
+                search_engine = words[0];
+                if (search_engine in SEARCH_MAP) {
+                    url = SEARCH_MAP[search_engine].replace("%s", words.slice(1).join(" "));
+                }
+            }
+            window.location.href = url;
+        }
+
+        (() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('s');
+            if (searchQuery)
+            {
+                search(searchQuery);
+            }
+        })();
+
+        function searchBoxKeyDownHandler(element) {
+            if (event.key == 'Enter') {
+                search(element.value);
+            }
+        }
+
+        function setBackgroundPicture() {
+            fetch("https://bing.biturl.top/", {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.url) {
+                    const styleSheet = document.styleSheets[0];
+                    let elementRules;
+
+                    for (let i = 0; i < styleSheet.cssRules.length; ++i) {
+                        if (styleSheet.cssRules[i].selectorText === "body") {
+                            elementRules = styleSheet.cssRules[i];
+                        }
+                    }
+
+                    elementRules.style.setProperty("background-image", "url(" + data.url + ")");
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setBackgroundPicture();
+        });
+    </script>
     <style type="text/css">
         :root {
-            --base-font-size: 18px;
-            --font-weight-normal: 500;
-            --font-weight-bold: 900;
+            --foreground-color: #f1f1f1;
+            --background-color: #0e0e0e;
+            --highlight-color: lightgreen;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --foreground-color: #0e0e0e;
+                --background-color: #f1f1f1;
+                --highlight-color: darkgreen;
+            }
         }
 
         @font-face {
@@ -25,106 +105,76 @@
             font-style: normal;
         }
 
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
         body {
-            font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
-            background: green;
+            background-color: var(--background-color);
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+            transition: background-image 3s ease-in;
+            font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
         }
 
         a {
             text-decoration: none;
+            color: var(--foreground-color);
         }
 
         a:hover {
             text-decoration: underline;
         }
 
+        h3 {
+            color: var(--highlight-color);
+        }
+
         article {
-            padding: 20px;
-            max-width: 900px;
-            margin: 100px auto 0 auto;
-            border: 1px solid;
-            border-radius: 10px;
+            align-items: center;
+            display: flex;
+            flex-flow: column nowrap;
+            height: 100%;
+            justify-content: space-evenly;
+            width: 100%;
         }
 
         .searchbar {
-            text-align: center;
-            margin: 20px auto;
+            align-items: center;
+            display: flex;
+            flex-flow: column nowrap;
+            max-width: 900px;
+            width: 100%;
         }
 
         .searchbar input {
-            width: 80%;
-            padding: 10px;
-            border-radius: 25px;
+            background-color: var(--background-color);
+            border-color: var(--highlight-color);
+            border-radius: 50px;
             border: 1px solid;
+            color: var(--foreground-color);
+            font-size: 1.5em;
+            opacity: 0.9;
+            padding: 20px;
+            width: 80%;
         }
 
         .favorites {
+            background-color: var(--background-color);
+            border-color: var(--highlight-color);
+            border-radius: 10px;
+            border: 1px solid;
+            color: var(--foreground-color);
             display: flex;
             flex-flow: row wrap;
             gap: 30px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #0e0e0e;
-            }
-
-            article {
-                background: #0e0e0e;
-                color: #f1f1f1;
-                border-color: lightgreen;
-            }
-
-            a {
-                color: #f1f1f1;
-            }
-
-            a:hover {
-                color: #fff;
-            }
-
-            h3 {
-                color: lightgreen;
-            }
-
-            .searchbar input {
-                background: #0e0e0e;
-                color: #f1f1f1;
-                border-color: lightgreen;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            body {
-                background: #f1f1f1;
-            }
-
-            article {
-                background: #f1f1f1;
-                color: #0e0e0e;
-                border-color: darkgreen;
-            }
-
-            a {
-                color: #0e0e0e;
-            }
-
-            a:hover {
-                color: #000;
-            }
-
-            h3 {
-                color: darkgreen;
-            }
-
-            .searchbar input {
-                background: #f1f1f1;
-                color: #0e0e0e;
-                border-color: darkgreen;
-            }
+            max-width: 900px;
+            opacity: 0.9;
+            padding: 20px;
         }
     </style>
 </head>
@@ -220,67 +270,4 @@
     </div>
 </article>
 </body>
-<script type="text/javascript">
-    function setBackgroundPicture() {
-        fetch("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1", {
-            mode: "no-cors",
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.url) {
-                document.body.style.backgroundImage = "url('https://www.bing.com" + data.url + "')";
-            }
-        });
-    }
-
-    function searchBoxKeyDownHandler(element) {
-        if (event.key == 'Enter') {
-            search(element.value);
-        }
-    }
-
-    const DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
-    const SEARCH_MAP = {
-        'amazon': 'https://www.amazon.de/s?k=%s',
-        'ebay'  : 'https://www.ebay.de/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xtest.TRS0&_nkw=%s&_sacat=0',
-        'img'   : 'https://www.google.com/search?biw=2560&bih=1336&tbm=isch&sa=1&ei=WdWnXNfIH-6Hk74Pj8Gy6AM&q=%s',
-        'man'   : 'https://man.cx/?page=%s&do%5Bgo%5D=go',
-        'map'   : 'https://www.google.de/maps/@49.0054018,8.3775153,15z?q=%s',
-        'sp'    : 'https://www.startpage.com/sp/search?query=%s&prfe=5e393999691de043c681bec7c63dcaa9b72b2170d3b94ff62fab182e5556a312dc85d3a6e9ad93df6eb8d2866147ffd9eabe15b478e367b2ffe12ecdecddfec7901c6e53e0fe1e1c934041bdf9',
-        'tr'    : 'https://translate.google.de/?sl=auto&tl=de&text=%s&op=translate',
-        'tre'   : 'https://translate.google.de/?sl=de&tl=en&text=%s&op=translate',
-        'w'     : 'https://www.wikipedia.org/search-redirect.php?family=wikipedia&language=en&language=de&go=Go&search=%s',
-        'we'    : 'https://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=%s',
-        'yt'    : 'https://www.youtube.com/results?search_query=%s',
-    }
-
-    function search(searchQuery) {
-        let url = DEFAULT_SEARCH.replace("%s", searchQuery);
-        const words = searchQuery.split(" ");
-        if (words.length > 1)
-        {
-            search_engine = words[0];
-            if (search_engine in SEARCH_MAP) {
-                url = SEARCH_MAP[search_engine].replace("%s", words.slice(1).join(" "));
-            }
-        }
-        window.location.href = url;
-    }
-
-
-    function main() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('s');
-        if (searchQuery)
-        {
-            search(searchQuery);
-        }
-    }
-
-    (() => { main(); })();
-</script>
 </html>
