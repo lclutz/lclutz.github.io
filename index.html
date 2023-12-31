@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Startseite</title>
+    <link href="favicon-light.png" rel="icon" media="(prefers-color-scheme: light)"/>
+    <link href="favicon-dark.png" rel="icon" media="(prefers-color-scheme: dark)"/>
     <script type="text/javascript">
         const DEFAULT_SEARCH = "https://www.google.com/search?q=%s";
         const SEARCH_MAP = {
@@ -78,31 +80,19 @@
     </script>
     <style type="text/css">
         :root {
-            --foreground-color: #f1f1f1;
-            --background-color: #0e0e0e;
-            --highlight-color: lightgreen;
+            --foreground-color: #e0def4;
+            --background-color: #232136;
+            --border-color: #56526e;
+            --highlight-color: #ea9a97;
         }
 
         @media (prefers-color-scheme: light) {
             :root {
-                --foreground-color: #0e0e0e;
-                --background-color: #f1f1f1;
-                --highlight-color: darkgreen;
+                --foreground-color: #575279;
+                --background-color: #faf4ed;
+                --border-color: #cecacd;
+                --highlight-color: #d7827e;
             }
-        }
-
-        @font-face {
-            font-family: 'Metropolis';
-            src: local('Metropolis-Medium'), url('./Metropolis-Medium.woff2');
-            font-weight: 500;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Metropolis';
-            src: local('Metropolis-Medium'), url('./Metropolis-Medium.woff2');
-            font-weight: 900;
-            font-style: normal;
         }
 
         html, body {
@@ -119,7 +109,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             transition: background-image 3s ease-in;
-            font-family: "Metropolis", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
         }
 
         a {
@@ -154,9 +144,8 @@
 
         .searchbar input {
             background-color: var(--background-color);
-            border-color: var(--highlight-color);
             border-radius: 50px;
-            border: 1px solid;
+            border: 1px solid var(--border-color);
             color: var(--foreground-color);
             font-size: 1.5em;
             opacity: 0.9;
@@ -166,9 +155,8 @@
 
         .favorites {
             background-color: var(--background-color);
-            border-color: var(--highlight-color);
             border-radius: 10px;
-            border: 1px solid;
+            border: 1px solid var(--border-color);
             color: var(--foreground-color);
             display: flex;
             flex-flow: row wrap;
@@ -186,32 +174,37 @@
     </div>
     <div class="favorites">
     <section>
+        <h3>Beliebte Links</h3>
+        <ul>
+            <li><a href="https://github.com/">GitHub</a></li>
+            <li><a href="https://www.youtube.com/">YouTube</a></li>
+            <li><a href="https://www.twitch.tv/">Twitch</a></li>
+            <li><a href="https://www.tagesschau.de/">Tagesschau</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Ausbildung</h3>
+        <ul>
+            <li><a href="https://www.hhs.karlsruhe.de/">Heinrich-Hertz-Schule</a></li>
+            <li><a href="https://pao-ihk-karlsruhe.de/tibrosBB/BB_auszubildende.jsp?allowCookies=OK">IHK Karlsruhe</a></li>
+            <li><a href="https://pao-ihk-karlsruhe.de/azubiapp/azubi/login">AzubiApp</a></li>
+            <li><a href="https://erato.webuntis.com/WebUntis/?school=HH-Schule-Karlsruhe">Webuntis</a></li>
+            <li><a href="https://pcloud.hhs.karlsruhe.de/">PCloud</a></li>
+        </ul>
+    </section>
+    <section>
         <h3>Docs</h3>
         <ul>
             <li><a href="https://en.cppreference.com/">C++ reference</a></li>
             <li><a href="https://docs.microsoft.com/en-us/windows/win32/api/">Win32</a></li>
-            <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-alphabetically?view=msvc-170">MSVC Compiler Options</a></li>
-            <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-170">MSVC Linker Options</a></li>
-            <li><a href="https://docs.oracle.com/en/java/javase/18/docs/api/index.html">Java SE 18</a></li>
+            <li><a href="https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#">Intel Intrinsics Guide</a></li>
+            <li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/index.html">Java SE 21</a></li>
             <li><a href="https://docs.python.org/3/">Python</a></li>
             <li><a href="https://pkg.go.dev/std">Go Standard Library</a></li>
             <li><a href="https://docs.gl/">OpenGL</a></li>
             <li><a href="https://docs.opencv.org/4.6.0/">OpenCV Modules</a></li>
             <li><a href="https://wiki.libsdl.org/APIByCategory">SDL2 API By Category</a></li>
-        </ul>
-    </section>
-    <section>
-        <h3>Spiele</h3>
-        <ul>
-            <li><a href="https://lichess.org/">Schach</a></li>
-            <li><a href="https://dan-ball.jp/en/javagame/dust/">Powder Game</a></li>
-            <li><a href="https://jacklance.github.io/PuzzleScript/play.html?p=cfdcc6e23f1fb3e9de2fd42fafaf4d4c">ENIGMASH</a></li>
-            <li><a href="https://de.crazygames.com/spiele/age-of-war?theatreMode=true">Age Of War</a></li>
-            <li><a href="https://neal.fun/perfect-circle/">Draw a Perfect Circle</a></li>
-            <li><a href="https://www.concerthotels.com/got-rhythm">Got Rhythm?</a></li>
-            <li><a href="https://humanbenchmark.com/">Human Benchmark</a></li>
-            <li><a href="https://monkeytype.com/">monkeytype</a></li>
-            <li><a href="https://tetr.io/">tetr.io</a></li>
+            <li><a href="https://www.raylib.com/cheatsheet/cheatsheet.html">Raylib Cheat Sheet</a></li>
         </ul>
     </section>
     <section>
@@ -219,8 +212,14 @@
         <ul>
             <li><a href="https://godbolt.org/">Compiler Explorer</a></li>
             <li><a href="https://cdecl.org/">cdecl</a></li>
-            <li><a href="https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#">Intel Intrinsics Guide</a></li>
             <li><a href="https://vcpkg.io/en/packages.html">vcpkg Package Search</a></li>
+            <li>
+                MSVC
+                <ul>
+                    <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-alphabetically">Compiler Options</a></li>
+                    <li><a href="https://docs.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-170">Linker Options</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <section>
@@ -228,8 +227,6 @@
         <ul>
             <li><a href="http://127.0.0.1:8384/">Syncthing</a></li>
             <li><a href="http://mcp.fritz.box:8096/web/index.html">Jellyfin</a></li>
-            <li><a href="http://localhost:9091/transmission/web/">Transmission</a></li>
-            <li><a href="http://127.0.0.1:2342/library/browse">PhotoPrism</a></li>
         </ul>
     </section>
     <section>
@@ -255,17 +252,10 @@
         </ul>
     </section>
     <section>
-        <h3>Self hosted</h3>
+        <h3>Selfhosted</h3>
         <ul>
             <li><a href="https://drive.lclutz.de/">Nextcloud</a></li>
             <li><a href="https://vault.lclutz.de/">Vaultwarden</a></li>
-        </ul>
-    </section>
-    <section>
-        <h3>Ausbildung</h3>
-        <ul>
-            <li><a href="https://pao-ihk-karlsruhe.de/tibrosBB/BB_auszubildende.jsp?allowCookies=OK">IHK Karlsruhe</a></li>
-            <li><a href="https://pao-ihk-karlsruhe.de/azubiapp/azubi/login">AzubiApp</a></li>
         </ul>
     </section>
     </div>
