@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Startseite</title>
+    <title>Custom Start</title>
     <link href="favicon-light.png" rel="icon" media="(prefers-color-scheme: light)"/>
     <link href="favicon-dark.png" rel="icon" media="(prefers-color-scheme: dark)"/>
     <script type="text/javascript">
@@ -75,6 +75,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("searchbox").focus();
             setBackgroundPicture();
         });
     </script>
@@ -84,6 +85,7 @@
             --background-color: #232136;
             --border-color: #56526e;
             --highlight-color: #ea9a97;
+            --link-highlight-color: #c4a7e7;
         }
 
         @media (prefers-color-scheme: light) {
@@ -92,6 +94,7 @@
                 --background-color: #faf4ed;
                 --border-color: #cecacd;
                 --highlight-color: #d7827e;
+                --link-highlight-color: #907aa9;
             }
         }
 
@@ -118,7 +121,7 @@
         }
 
         a:hover {
-            text-decoration: underline;
+            color: var(--link-highlight-color);
         }
 
         h3 {
@@ -153,6 +156,10 @@
             width: 80%;
         }
 
+        .searchbar input:focus {
+            outline: none;
+        }
+
         .favorites {
             background-color: var(--background-color);
             border-radius: 10px;
@@ -174,12 +181,23 @@
     </div>
     <div class="favorites">
     <section>
-        <h3>Beliebte Links</h3>
+        <h3>Unterhaltung</h3>
         <ul>
-            <li><a href="https://github.com/">GitHub</a></li>
             <li><a href="https://www.youtube.com/">YouTube</a></li>
+            <li><a href="https://music.youtube.com/">YouTube Music</a></li>
+            <li><a href="http://mcp.fritz.box:8096/web/index.html">Jellyfin</a></li>
             <li><a href="https://www.twitch.tv/">Twitch</a></li>
+            <li><a href="https://www.netflix.com/de/">Netflix</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>News</h3>
+        <ul>
             <li><a href="https://www.tagesschau.de/">Tagesschau</a></li>
+            <li><a href="https://netzpolitik.org/">netzpolitik.org</a></li>
+            <li><a href="https://heise.de/">Heise</a></li>
+            <li><a href="https://krebsonsecurity.com/">Krebs on Security</a></li>
+            <li><a href="https://www.kuketz-blog.de/">Kuketz Blog</a></li>
         </ul>
     </section>
     <section>
@@ -223,13 +241,6 @@
         </ul>
     </section>
     <section>
-        <h3>Lokal</h3>
-        <ul>
-            <li><a href="http://127.0.0.1:8384/">Syncthing</a></li>
-            <li><a href="http://mcp.fritz.box:8096/web/index.html">Jellyfin</a></li>
-        </ul>
-    </section>
-    <section>
         <h3>Intern</h3>
         <ul>
             <li><a href="http://stachelbeere.fritz.box/Temperatur.html">Temperaturkurve</a></li>
@@ -256,6 +267,12 @@
         <ul>
             <li><a href="https://drive.lclutz.de/">Nextcloud</a></li>
             <li><a href="https://vault.lclutz.de/">Vaultwarden</a></li>
+        </ul>
+    </section>
+    <section>
+        <h3>Lokal</h3>
+        <ul>
+            <li><a href="http://127.0.0.1:8384/">Syncthing</a></li>
         </ul>
     </section>
     </div>
